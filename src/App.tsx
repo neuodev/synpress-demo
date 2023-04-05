@@ -54,9 +54,13 @@ function App() {
       <h1>Synpress + Cypress + React</h1>
       <div className="card">
         {isConnected ? (
-          <button onClick={() => disconnect()}>Disconnect</button>
+          <button id="disconnect-btn" onClick={() => disconnect()}>
+            Disconnect
+          </button>
         ) : (
-          <button onClick={() => connect()}>Connect</button>
+          <button id="connect-btn" onClick={() => connect()}>
+            Connect
+          </button>
         )}
         <p id="address">Address: {address || "??"}</p>
         <p id="connected">Connected: {isConnected ? "YES" : "NO"}</p>

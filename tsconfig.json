@@ -14,7 +14,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "http://127.0.0.1:8080/"
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
