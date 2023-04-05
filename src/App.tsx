@@ -4,7 +4,6 @@ import SynpressLogo from "/synpress.png";
 import CypressLogo from "/cypress.svg";
 import "./App.css";
 import {
-  WagmiConfig,
   createClient,
   configureChains,
   useConnect,
