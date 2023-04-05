@@ -1,0 +1,6 @@
+build image:
+  image: docker
+  services:
+    - docker:dind
+  script:
+    - docker-compose -f docker-compose.yml up synpress

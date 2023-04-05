@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "synpress:run": "env-cmd -f .env synpress run --configFile synpress.config.js",
-    "test:e2e": "start-server-and-test 'yarn start' http://localhost:8080 'yarn synpress:run'"
+    "test:e2e": "start-server-and-test 'yarn dev' http://localhost:8080 'yarn synpress:run'"
   },
   "dependencies": {
     "colors": "^1.4.0",
