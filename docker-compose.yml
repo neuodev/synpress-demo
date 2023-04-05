@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  synpress:
+    profiles:
+      - synpress
+    container_name: synpress
+    build: .
+    environment:
+      - DISPLAY=display:0.0
+      - CYPRESS_DOCKER_RUN=true
+      - CI=true
+    entrypoint: []
+    working_dir: /app
+    command: >
+      yarn synpress:run
