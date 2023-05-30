@@ -1,0 +1,60 @@
+name: dApp E2E tests
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.label ||
+    github.head_ref || github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # pin@v2
+
+      - name: Setup node
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # pin@v3.6.0
+        with:
+          node-version: 18.16
+
+      - name: Install dependencies
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Install linux deps
+        run: |
+          sudo apt-get install --no-install-recommends -y \
+          fluxbox \
+          xvfb
+
+      - name: Run e2e tests
+        run: |
+          Xvfb :0 -screen 0 1024x768x24 -listen tcp -ac &
+          fluxbox &
+          yarn test:e2e
+        env:
+          SECRET_WORDS: "test test test test test test test test test test test junk"
+          NETWORK_NAME: "Mumbai"
+          CHAIN_ID: 80001
+          RPC_URL: "https://matic-mumbai.chainstacklabs.com"
+          SYMBOL: "MATIC"
+          IS_TESTNET: true
+          DISPLAY: :0.0
+
+      - name: Archive e2e artifacts
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # pin@v2
+        if: always()
+        with:
+          name: e2e-artifacts
+          path: |
+            tests/e2e/videos
+            tests/e2e/screenshots
+        continue-on-error: true
