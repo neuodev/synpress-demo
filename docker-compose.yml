@@ -13,7 +13,7 @@ services:
     entrypoint: []
     working_dir: /app
     command: >
-      yarn test:e2e
+      yarn test:e2e:sy
     depends_on:
       - display
     networks:

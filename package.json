@@ -8,9 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "synpress:run": "env-cmd -f .env synpress run --configFile synpress.config.js",
-    "test:e2e": "start-server-and-test 'yarn dev' http://localhost:8080 'yarn synpress:run'",
-    "test:pw:headless": "playwright test --browser chromium",
-    "test:pw:headed": "yarn test:pw:headless --headed"
+    "test:e2e:sy": "start-server-and-test 'yarn dev' http://localhost:8080 'yarn synpress:run'",
+    "test:pw": "playwright test --browser chromium",
+    "test:e2e:pw": "start-server-and-test 'yarn dev' http://localhost:8080 'yarn test:pw'"
   },
   "dependencies": {
     "colors": "^1.4.0",
